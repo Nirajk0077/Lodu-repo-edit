@@ -326,11 +326,11 @@ async def start(client, message):
                     reply_markup=InlineKeyboardMarkup(btn)
                 )
                 filesarr.append(msg)
-            k = await client.send_message(chat_id=message.from_user.id, text=script.DEL_MSG.format(get_time(FILE_DELETE_TIME)), parse_mode=enums.ParseMode.HTML)
+            # k = await client.send_message(chat_id=message.from_user.id, text=script.DEL_MSG.format(get_time(FILE_DELETE_TIME)), parse_mode=enums.ParseMode.HTML)
             await asyncio.sleep(FILE_DELETE_TIME)
             for x in filesarr:
                 await x.delete()
-            await k.delete()
+            # await k.delete()
             return
         except Exception as e:
             logger.exception(e)
@@ -369,12 +369,12 @@ async def start(client, message):
                 f_caption,
                 reply_markup=InlineKeyboardMarkup(btn)
             )
-            k = await msg.reply(script.DEL_MSG.format(get_time(FILE_DELETE_TIME)),
-                quote=True, parse_mode=enums.ParseMode.HTML
-            )
+            # k = await msg.reply(script.DEL_MSG.format(get_time(FILE_DELETE_TIME)),
+            #    quote=True, parse_mode=enums.ParseMode.HTML
+            # )
             await asyncio.sleep(FILE_DELETE_TIME)
             await msg.delete()
-            await k.delete()
+            # await k.delete()
             return
         except Exception as e:
             logger.exception(e)
@@ -406,12 +406,12 @@ async def start(client, message):
         protect_content=settings.get('file_secure', PROTECT_CONTENT),
         reply_markup=InlineKeyboardMarkup(btn)
     )
-    k = await msg.reply(script.DEL_MSG.format(get_time(FILE_DELETE_TIME)),
-        quote=True, parse_mode=enums.ParseMode.HTML
-    )     
+    # k = await msg.reply(script.DEL_MSG.format(get_time(FILE_DELETE_TIME)),
+    #    quote=True, parse_mode=enums.ParseMode.HTML
+    # )     
     await asyncio.sleep(FILE_DELETE_TIME)
     await msg.delete()
-    await k.delete()
+    # await k.delete()
     return
 
 async def stream_buttons(user_id: int, file_id: str):
