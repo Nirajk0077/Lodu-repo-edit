@@ -192,19 +192,17 @@ IF YOU WANT THAT FILE, REQUEST AGAIN
 
 
 
-    I_CUDNT = """<b>sᴏʀʀʏ ɴᴏ ꜰɪʟᴇs ᴡᴇʀᴇ ꜰᴏᴜɴᴅ ꜰᴏʀ ʏᴏᴜʀ ʀᴇǫᴜᴇꜱᴛ {} 😕
+    I_CUDNT = """<b>● I could not find the file you requested 😕
 
-ᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴘᴇʟʟɪɴɢ ɪɴ ɢᴏᴏɢʟᴇ ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ 😃
+● Is the movie you asked about released OTT..?
 
-📝 ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇꜱᴛ ꜰᴏʀᴍᴀᴛ 👇
+● <u>Pay attention to the following...</u>
 
-⚜️ ᴇxᴀᴍᴘʟᴇ : Jawan or Jawan 2023 
+● Ask for correct spelling.
 
-📝 ꜱᴇʀɪᴇꜱ ʀᴇǫᴜᴇꜱᴛ ꜰᴏʀᴍᴀᴛ 👇
+● Do not ask for movies that are not released on OTT platforms.
 
-⚜️ ᴇxᴀᴍᴘʟᴇ : Loki S01 or Loki S01E04 or Lucifer S03E24
-
-🚯 ᴅᴏɴᴛ ᴜꜱᴇ ➠ ':(!,./)</b>"""
+● Also ask [movie name, language] like this...</b>"""
     
     I_CUD_NT = """<b>ɪ ᴄᴏᴜʟᴅɴ'ᴛ ꜰɪɴᴅ ᴀɴʏ ᴍᴏᴠɪᴇ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ {}.
 
@@ -267,21 +265,22 @@ Nᴀᴍᴇ : {}
 
 Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
-    CAPTION = """<b><a href="https://t.me/dreamxbotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a href="https://t.me/dreamxbotz">[ ᴅʀᴇᴀᴍxʙᴏᴛᴢ ]</a></b>"""
+    CAPTION = """<b>{file_name}</b>
 
+<b>⚠️ ❌👉This file automatically❗delete after 1 minute❗so please forward in another chat👈❌</b>"""
     
     MOVIE_UPDATE_NOTIFY_TXT = """
-</b><a href={poster_url}>📥</a><a href={imdb_url}>New {tag} Added</a></b>
+</b><a href={poster_url}>📥 </a><a href={imdb_url}>NEW {tag} ADDED</a></b>
 
-<blockquote>✨ ᴛɪᴛʟᴇ : <code>{filename}</code>
-
-🎭 ɢᴇɴʀᴇs : <b>{genres}</b>
-📺 ᴏᴛᴛ        : <b>{ott}</b>
-🎞️ ǫᴜᴀʟɪᴛʏ : <b>{quality}</b>
-🎧 ᴀᴜᴅɪᴏ    : <b>{language}</b>
-🔥 ʀᴀᴛɪɴɢ   : <b>{rating}</b>
-{episodes}
-</blockquote>
+✨ ᴛɪᴛʟᴇ : <code>{filename}</code>
+─┉─•✦•─┉─
+<blockquote>🎭 ɢᴇɴʀᴇs : <b>{genres}</b>
+🍿 ᴏᴛᴛ        : <b>{ott}</b>
+🎬 ǫᴜᴀʟɪᴛʏ : <b>{quality}</b>
+🔉 ᴀᴜᴅɪᴏ    : <b>{language}</b>
+🌟 ʀᴀᴛɪɴɢ   : <b>{rating}</b>
+{episodes}</blockquote>
+─┉─•✦•─┉─
 
 🔍 <b>Sᴇᴀʀᴄʜ →</b> {search_link}
 """
