@@ -2011,7 +2011,7 @@ async def auto_filter(client, msg, spoll=False):
                     for idx, file in enumerate(files, start=1):
                         cap += f"<b>\n{idx}. <a href='https://telegram.me/{temp.U_NAME}?start=file_{message.chat.id}_{file.file_id}'>[{get_size(file.file_size)}] {clean_filename(file.file_name)}\n</a></b>"
 
-        sent = None
+                sent = None
         try:
             if imdb and imdb.get('poster'):
                 try:
@@ -2019,20 +2019,48 @@ async def auto_filter(client, msg, spoll=False):
                         photo = imdb.get('backdrop') if imdb.get('backdrop') and LANDSCAPE_POSTER else imdb.get('poster')
                     else:
                         photo = imdb.get('poster')
-                    sent = await message.reply_photo(photo=photo, caption=cap, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML)
+                    # Photo ke sath reply box lane ke liye reply_to_message_id add kiya gaya hai
+                    sent = await message.reply_photo(
+                        photo=photo, 
+                        caption=cap, 
+                        reply_markup=InlineKeyboardMarkup(btn), 
+                        parse_mode=enums.ParseMode.HTML,
+                        reply_to_message_id=message.id
+                    )
                     if m:
                         await m.delete()
                 except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
                     pic = imdb.get('poster')
                     poster = pic.replace('.jpg', "._V1_UX360.jpg")
-                    sent = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML)
+                    # Yahan bhi reply box add kiya gaya hai
+                    sent = await message.reply_photo(
+                        photo=poster, 
+                        caption=cap, 
+                        reply_markup=InlineKeyboardMarkup(btn), 
+                        parse_mode=enums.ParseMode.HTML,
+                        reply_to_message_id=message.id
+                    )
                     if m:
                         await m.delete()
                 except Exception as e:
                     logger.exception(e)
-                    sent = await message.reply_text(text=cap, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
+                    # Text result ke liye quote=True use kiya gaya hai
+                    sent = await message.reply_text(
+                        text=cap, 
+                        reply_markup=InlineKeyboardMarkup(btn), 
+                        disable_web_page_preview=True, 
+                        parse_mode=enums.ParseMode.HTML,
+                        quote=True
+                    )
             else:
-                sent = await message.reply_text(text=cap, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
+                # Bina poster wale result me reply box
+                sent = await message.reply_text(
+                    text=cap, 
+                    reply_markup=InlineKeyboardMarkup(btn), 
+                    disable_web_page_preview=True, 
+                    parse_mode=enums.ParseMode.HTML,
+                    quote=True
+                )
                 if m:
                     await m.delete()
         except Exception as e:
@@ -2089,7 +2117,7 @@ async def advantage_spell_chok(client, message):
     except Exception as e:
         logger.exception("get_poster failed for query=%s: %s", query, e)
         try:
-            # Screenshot style: Simple reply without buttons
+            # Simple reply with box
             k = await message.reply_text(
                 text=script.I_CUDNT.format(message.from_user.mention),
                 reply_to_message_id=message.id
@@ -2099,9 +2127,8 @@ async def advantage_spell_chok(client, message):
         except: pass
         return
 
-    # Google Button yahan se remove kar diya gaya hai
     if not movies:
-        # Screenshot ke mutabiq message ko quote karke rules dikhana
+        # Quote with box
         k = await message.reply_text(
             text=script.I_CUDNT.format(message.from_user.mention), 
             reply_to_message_id=message.id,
@@ -2116,14 +2143,13 @@ async def advantage_spell_chok(client, message):
 
     user = message.from_user.id if message.from_user else 0
     
-    # Movie list suggestions buttons
     buttons = [
         [InlineKeyboardButton(text=movie.get('title'), callback_data=f"spol#{movie.movieID}#{user}")] 
         for movie in movies
     ]
     buttons.append([InlineKeyboardButton(text="🚫 ᴄʟᴏsᴇ 🚫", callback_data='close_data')])
 
-    # Screenshot style: Reply box jisme user ka naam bold ho
+    # Spell check suggestions with reply box
     d = await message.reply_text(
         text=script.CUDNT_FND.format(message.from_user.mention), 
         reply_markup=InlineKeyboardMarkup(buttons), 
@@ -2136,3 +2162,4 @@ async def advantage_spell_chok(client, message):
         await d.delete()
         await message.delete()
     except: pass
+
