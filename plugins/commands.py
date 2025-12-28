@@ -323,8 +323,7 @@ async def start(client, message):
                     file_id=file_id,
                     caption=f_caption,
                     protect_content=settings.get('file_secure', PROTECT_CONTENT),
-                    reply_markup=InlineKeyboardMarkup(btn),
-                    reply_to_message_id=message.id # Isse reply box aayega
+                    reply_markup=InlineKeyboardMarkup(btn)
                 )
                 filesarr.append(msg)
             # k = await client.send_message(chat_id=message.from_user.id, text=script.DEL_MSG.format(get_time(FILE_DELETE_TIME)), parse_mode=enums.ParseMode.HTML)
@@ -352,9 +351,7 @@ async def start(client, message):
                 cover=cover,
                 file_id=file_id,
                 protect_content=settings.get('file_secure', PROTECT_CONTENT),
-                reply_markup=InlineKeyboardMarkup(btn),
-                reply_to_message_id=message.id # Isse reply box aayega
-            )
+                reply_markup=InlineKeyboardMarkup(btn))
 
             filetype = msg.media
             file = getattr(msg, filetype.value)
@@ -373,7 +370,7 @@ async def start(client, message):
                 reply_markup=InlineKeyboardMarkup(btn)
             )
             # k = await msg.reply(script.DEL_MSG.format(get_time(FILE_DELETE_TIME)),
-            #     quote=True, parse_mode=enums.ParseMode.HTML
+            #    quote=True, parse_mode=enums.ParseMode.HTML
             # )
             await asyncio.sleep(FILE_DELETE_TIME)
             await msg.delete()
@@ -407,11 +404,10 @@ async def start(client, message):
         cover=cover,
         caption=f_caption,
         protect_content=settings.get('file_secure', PROTECT_CONTENT),
-        reply_markup=InlineKeyboardMarkup(btn),
-        reply_to_message_id=message.id # Isse reply box aayega
+        reply_markup=InlineKeyboardMarkup(btn)
     )
     # k = await msg.reply(script.DEL_MSG.format(get_time(FILE_DELETE_TIME)),
-    #     quote=True, parse_mode=enums.ParseMode.HTML
+    #    quote=True, parse_mode=enums.ParseMode.HTML
     # )     
     await asyncio.sleep(FILE_DELETE_TIME)
     await msg.delete()
