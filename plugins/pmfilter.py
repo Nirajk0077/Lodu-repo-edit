@@ -1783,7 +1783,7 @@ async def auto_filter(client, msg, spoll=False):
             # ignore scheduling errors
             pass
 
-    # initialize to avoid NameError if reply_sticker fails
+        # initialize to avoid NameError if reply_sticker fails
     m = None
 
     try:
@@ -1797,14 +1797,15 @@ async def auto_filter(client, msg, spoll=False):
                 message_text = message.text or ""
                 search = message_text.lower()
 
-                stick_id = "CAACAgIAAxkBAAEPhm5o439f8A4sUGO2VcnBFZRRYxAxmQACtCMAAphLKUjeub7NKlvk2TYE"
-                keyboard = InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(f'🔎 sᴇᴀʀᴄʜɪɴɢ {search}', callback_data="hiding")]]
-                )
-                try:
-                    m = await message.reply_sticker(sticker=stick_id, reply_markup=keyboard)
-                except Exception as e:
-                    logger.exception("reply_sticker failed: %s", e)
+                # Sticker aur Button ko yahan comment kar diya gaya hai
+                # stick_id = "CAACAgIAAxkBAAEPhm5o439f8A4sUGO2VcnBFZRRYxAxmQACtCMAAphLKUjeub7NKlvk2TYE"
+                # keyboard = InlineKeyboardMarkup(
+                #     [[InlineKeyboardButton(f'🔎 sᴇᴀʀᴄʜɪɴɢ {search}', callback_data="hiding")]]
+                # )
+                # try:
+                #     m = await message.reply_sticker(sticker=stick_id, reply_markup=keyboard)
+                # except Exception as e:
+                #     logger.exception("reply_sticker failed: %s", e)
 
                 find = search.split(" ")
                 search = ""
