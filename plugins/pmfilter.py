@@ -1783,7 +1783,7 @@ async def auto_filter(client, msg, spoll=False):
             # ignore scheduling errors
             pass
 
-        # initialize to avoid NameError if reply_sticker fails
+            # initialize to avoid NameError
     m = None
 
     try:
@@ -1797,7 +1797,10 @@ async def auto_filter(client, msg, spoll=False):
                 message_text = message.text or ""
                 search = message_text.lower()
 
-                # Sticker aur Button ko yahan comment kar diya gaya hai
+                # Typing action dikhane ke liye:
+                await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
+
+                # Sticker aur Button commented hain (Kuch bhi remove nahi kiya)
                 # stick_id = "CAACAgIAAxkBAAEPhm5o439f8A4sUGO2VcnBFZRRYxAxmQACtCMAAphLKUjeub7NKlvk2TYE"
                 # keyboard = InlineKeyboardMarkup(
                 #     [[InlineKeyboardButton(f'🔎 sᴇᴀʀᴄʜɪɴɢ {search}', callback_data="hiding")]]
@@ -1826,7 +1829,9 @@ async def auto_filter(client, msg, spoll=False):
                 settings = await get_settings(message.chat.id)
                 if not files:
                     if settings.get("spell_check"):
-                        ai_sts = await m.edit('🤖 ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ, ᴀɪ ɪꜱ ᴄʜᴇᴄᴋɪɴɢ ʏᴏᴜʀ ꜱᴘᴇʟʟɪɴɢ...')
+                        # AI typing feel dene ke liye normal reply
+                        ai_sts = await message.reply_text('🤖 ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ, ᴀɪ ɪꜱ ᴄʜᴇᴄᴋɪɴɢ ʏᴏᴜʀ ꜱᴘᴇʟʟɪɴɢ...')
+                        
                         is_misspelled = await ai_spell_check(chat_id=message.chat.id, wrong_name=search)
 
                         if is_misspelled:
@@ -1834,15 +1839,11 @@ async def auto_filter(client, msg, spoll=False):
                             message.text = is_misspelled
                             await ai_sts.delete()
                             return await auto_filter(client, message)
+                        
                         await ai_sts.delete()
                         result = await advantage_spell_chok(client, message)
                         return result
                     else:
-                        try:
-                            if m:
-                                await m.delete()
-                        except Exception:
-                            pass
                         result = await advantage_spell_chok(client, message)
                         return result
             else:
