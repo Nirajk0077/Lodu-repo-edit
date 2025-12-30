@@ -1772,11 +1772,14 @@ async def auto_filter(client, msg, spoll=False):
 
             # Send notification
             try:
-                await client.send_message(
+                sent_alert = await client.send_message(
                     chat_id=chat_id,
                     text=script.BUTTON_DELETION_TXT.format(user_mention),
                     parse_mode=enums.ParseMode.HTML
                 )
+                # Capture the sent alert message to DB for later deletion
+                if sent_alert:
+                     await db.add_alert_message(chat_id, sent_alert.id, datetime.now())
             except Exception as e:
                 logger.error(e)
         except Exception:
