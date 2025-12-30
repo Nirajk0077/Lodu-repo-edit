@@ -1772,11 +1772,20 @@ async def auto_filter(client, msg, spoll=False):
 
             # Send notification
             try:
-                await client.send_message(
+                alert_msg = await client.send_message(
                     chat_id=chat_id,
                     text=script.BUTTON_DELETION_TXT.format(user_mention),
                     parse_mode=enums.ParseMode.HTML
                 )
+
+                async def delete_alert_message(msg):
+                    await asyncio.sleep(ALERT_MSG_DELETE_TIME)
+                    try:
+                        await msg.delete()
+                    except Exception:
+                        pass
+
+                asyncio.create_task(delete_alert_message(alert_msg))
             except Exception as e:
                 logger.error(e)
         except Exception:
