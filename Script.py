@@ -266,7 +266,7 @@ Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
     CAPTION = """<b>{file_name}</b>
 
-<b>⚠️ ❌👉This file automatically❗delete after 1 minute❗so please forward in another chat👈❌</b>"""
+<b>⚠️ ❌👉This file automatically❗delete after 10 minutes❗so please forward in another chat👈❌</b>"""
     
     MOVIE_UPDATE_NOTIFY_TXT = """
 </b><a href={poster_url}>📥 </a><a href={imdb_url}>NEW {tag} ADDED</a></b>
