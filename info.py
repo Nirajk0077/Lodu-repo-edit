@@ -144,6 +144,7 @@ PORT = int(environ.get("PORT", "8080"))  # Port for the web server (default: 808
 MSG_ALRT = environ.get('MSG_ALRT', 'Share & Support Us ♥️') # Alert message for users
 DELETE_TIME = int(environ.get("DELETE_TIME", "300"))  #  deletion time in seconds (default: 5 minutes). Adjust as per your needs.
 BUTTON_DELETE_TIME = int(environ.get("BUTTON_DELETE_TIME", "180"))
+ALERT_MSG_DELETE_TIME = int(environ.get("ALERT_MSG_DELETE_TIME", "600"))
 FILE_DELETE_TIME = int(environ.get("FILE_DELETE_TIME", "60"))
 CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")   # Custom caption for files
 BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION) # Custom caption for batch files
